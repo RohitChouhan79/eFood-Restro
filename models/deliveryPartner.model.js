@@ -1,0 +1,34 @@
+import mongoose from "mongoose";
+
+const { Schema } = mongoose;
+
+const deliveryPartnerSchema = new Schema(
+  {
+    branchId: { type: Schema.Types.ObjectId, ref: 'Branch' },
+    employeeId: { type: Schema.Types.ObjectId, ref: 'Employee' },
+    firstName: { type: String },
+    lastName: { type: String },
+    identityType: { type: String, enum: ['Driving License', 'Aadhar Card'] },
+    identityNumber: { type: String},
+    identityImage: { type: String },
+    emailAddress: { type: String },
+    password: { type: String },
+    contactNumber: { type: String },
+    // address: {
+    //   streetName: { type: String },
+    //   landMark: { type: String },
+    //   city: { type: String },
+    //   pinCode: { type: String },
+    //   state: { type: String },
+    //   country: { type: String },
+    // },
+    profile: { type: String },
+    requestStatus: { type: String, enum: ['Accept', 'Pending', 'Denied'], default: 'Pending' },
+    orderId: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
+    is_active: { type: Boolean, default: true }
+  },
+  {
+    timestamps: true,
+  }
+);
+export default mongoose.model("DeliveryPartner", deliveryPartnerSchema);
